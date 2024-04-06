@@ -1,7 +1,7 @@
 package com.demo.ViNaStack.Model;
 
 import jakarta.persistence.*;
-import java.util.Date;
+
 import java.util.List;
 
 @Entity
@@ -11,9 +11,20 @@ public class Appointment {
     private int id;
     private int doctor_id;
     private String appointment_time;
-    @ElementCollection(targetClass = String.class)
-    private List<String> symptoms;
+    @ManyToMany(cascade = CascadeType.PERSIST) // For persisting symptoms automatically
+    @JoinTable(name = "appointment_symptoms", // Define join table name
+            joinColumns = @JoinColumn(name = "appointment_id"),
+            inverseJoinColumns = @JoinColumn(name = "symptom_id"))
+    private List<Symptom> symptoms;
     private int patient_id;
+
+    public Appointment(int id, int doctor_id, String appointment_time, List<Symptom> symptoms, int patient_id) {
+        this.id = id;
+        this.doctor_id = doctor_id;
+        this.appointment_time = appointment_time;
+        this.symptoms = symptoms;
+        this.patient_id = patient_id;
+    }
 
     public Appointment() {
 
@@ -39,15 +50,15 @@ public class Appointment {
         return appointment_time;
     }
 
-    public void setAppointment_time(String Appointment_time) {
-        this.appointment_time = Appointment_time;
+    public void setAppointment_time(String appointment_time) {
+        this.appointment_time = appointment_time;
     }
 
-    public List<String> getSymptoms() {
+    public List<Symptom> getSymptoms() {
         return symptoms;
     }
 
-    public void setSymptoms(List<String> symptoms) {
+    public void setSymptoms(List<Symptom> symptoms) {
         this.symptoms = symptoms;
     }
 
@@ -56,14 +67,6 @@ public class Appointment {
     }
 
     public void setPatient_id(int patient_id) {
-        this.patient_id = patient_id;
-    }
-
-    public Appointment(int id, int doctor_id, String Appointment_time, List<String> symptoms, int patient_id) {
-        this.id = id;
-        this.doctor_id = doctor_id;
-        this.appointment_time = Appointment_time;
-        this.symptoms = symptoms;
         this.patient_id = patient_id;
     }
 }
