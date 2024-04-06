@@ -1,11 +1,11 @@
 package com.demo.ViNaStack.Model;
 
 import jakarta.persistence.*;
-import java.util.Date;
+
 import java.util.List;
 
 @Entity
-public class Appoinment {
+public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -18,7 +18,7 @@ public class Appoinment {
     private List<Symptom> symptoms;
     private int patient_id;
     
-    public Appoinment(int id, int doctor_id, String appointment_time, List<Symptom> symptoms, int patient_id) {
+    public Appointment(int id, int doctor_id, String appointment_time, List<Symptom> symptoms, int patient_id) {
         this.id = id;
         this.doctor_id = doctor_id;
         this.appointment_time = appointment_time;
@@ -26,7 +26,7 @@ public class Appoinment {
         this.patient_id = patient_id;
     }
     
-    public Appoinment() {
+    public Appointment() {
     
     }
     

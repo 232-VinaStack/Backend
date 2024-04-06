@@ -2,8 +2,8 @@ package com.demo.ViNaStack.Controller;
 
 
 
-import com.demo.ViNaStack.Model.Appoinment;
-import com.demo.ViNaStack.Repositories.AppoinmentRepository;
+import com.demo.ViNaStack.Model.Appointment;
+import com.demo.ViNaStack.Repositories.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +13,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api")
-public class AppoinmentController {
+public class AppointmentController {
     @Autowired
-    private AppoinmentRepository repossitory;
+    private AppointmentRepository repossitory;
 
     @GetMapping("/appointments")
-    List<Appoinment> getAppoinment() {
+    List<Appointment> getAppoinment() {
         return repossitory.findAll();
     }
 
@@ -33,7 +33,7 @@ public class AppoinmentController {
     }
 
     @RequestMapping(value = "/appointments/{id}", method = RequestMethod.POST)
-    public ResponseEntity<String> addAppointment(@RequestBody Appoinment appointment) {
+    public ResponseEntity<String> addAppointment(@RequestBody Appointment appointment) {
 
         try {
             repossitory.save(appointment);
