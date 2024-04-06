@@ -11,9 +11,11 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
-    public Product(){}
+    public Product() {
+    }
+
     public Product(int name) {
         this.name = name;
     }
@@ -23,5 +25,7 @@ public class Product {
     }
 
     @Override
-    public String toString() {return "PROduct" + name;}
+    public String toString() {
+        return "PROduct" + name;
+    }
 }
