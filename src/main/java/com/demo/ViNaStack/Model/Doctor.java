@@ -16,6 +16,9 @@ public class Doctor {
     private Long id;
 
     private String name;
+    private String avatarLink;
+    private Integer expYear;
+    private String education;
     @ManyToMany(mappedBy = "doctors")
     private List<Clinic> clinics = new ArrayList<>();
 
