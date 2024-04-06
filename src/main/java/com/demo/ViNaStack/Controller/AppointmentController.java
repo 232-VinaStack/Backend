@@ -2,24 +2,23 @@ package com.demo.ViNaStack.Controller;
 
 
 
-import com.demo.ViNaStack.Model.Appoinment;
-import com.demo.ViNaStack.Repositories.AppoinmentRepository;
+import com.demo.ViNaStack.Model.Appointment;
+import com.demo.ViNaStack.Repositories.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "/api")
-public class AppoinmentController {
+@RequestMapping(path = "")
+public class AppointmentController {
     @Autowired
-    private AppoinmentRepository repossitory;
+    private AppointmentRepository repossitory;
 
     @GetMapping("/appointments")
-    List<Appoinment> getAppoinment() {
+    List<Appointment> getAppointment() {
         return repossitory.findAll();
     }
 
@@ -33,14 +32,14 @@ public class AppoinmentController {
         }
     }
 
-    @RequestMapping(value = "/appointments", method = RequestMethod.POST)
-    public ResponseEntity<Appoinment> addAppointment(@RequestBody Appoinment appointment) {
+    @RequestMapping(value = "/appointments/{id}", method = RequestMethod.POST)
+    public ResponseEntity<String> addAppointment(@RequestBody Appointment appointment) {
+
         try {
             repossitory.save(appointment);
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok("Appointment added successfully");
         } catch (Exception e) {
-            // ... Error handling ...
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(appointment);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add appointment");
         }
     }
 }

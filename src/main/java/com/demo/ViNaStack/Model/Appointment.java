@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Appoinment {
+public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -15,10 +15,10 @@ public class Appoinment {
     private List<String> symptoms;
     private int patient_id;
 
-    public Appoinment() {
+    public Appointment() {
 
     }
-    
+
     public int getId() {
         return id;
     }
@@ -39,8 +39,8 @@ public class Appoinment {
         return appointment_time;
     }
 
-    public void setAppointment_time(String appoinment_time) {
-        this.appointment_time = appoinment_time;
+    public void setAppointment_time(String Appointment_time) {
+        this.appointment_time = Appointment_time;
     }
 
     public List<String> getSymptoms() {
@@ -59,10 +59,10 @@ public class Appoinment {
         this.patient_id = patient_id;
     }
 
-    public Appoinment(int id, int doctor_id, String appoinment_time, List<String> symptoms, int patient_id) {
+    public Appointment(int id, int doctor_id, String Appointment_time, List<String> symptoms, int patient_id) {
         this.id = id;
         this.doctor_id = doctor_id;
-        this.appointment_time = appoinment_time;
+        this.appointment_time = Appointment_time;
         this.symptoms = symptoms;
         this.patient_id = patient_id;
     }
