@@ -25,6 +25,42 @@ public class Doctor {
     public Doctor() {
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setAvatarLink(String avatarLink) {
+        this.avatarLink = avatarLink;
+    }
+
+    public void setExpYear(Integer expYear) {
+        this.expYear = expYear;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public void setClinics(List<Clinic> clinics) {
+        this.clinics = clinics;
+    }
+
+    public Integer getExpYear() {
+        return expYear;
+    }
+
+    public String getAvatarLink() {
+        return avatarLink;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
     public Doctor(String name) {
         this.name = name;
     }

@@ -1,7 +1,9 @@
 package com.demo.ViNaStack.Controller;
 
-import com.demo.ViNaStack.Model.Appoinment;
-import com.demo.ViNaStack.Repositories.AppoinmentRepository;
+
+
+import com.demo.ViNaStack.Model.Appointment;
+import com.demo.ViNaStack.Repositories.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,17 +12,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/appoinments")
-public class AppoinmentController {
+@RequestMapping(path = "")
+public class AppointmentController {
     @Autowired
-    private AppoinmentRepository repossitory;
+    private AppointmentRepository repossitory;
 
-    @GetMapping("")
-    List<Appoinment> getAppoinment() {
+    @GetMapping("/appointments")
+    List<Appointment> getAppointment() {
         return repossitory.findAll();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/appointments/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteAppointment(@PathVariable("id") long id) {
         try {
             repossitory.deleteById(id);
@@ -30,8 +32,8 @@ public class AppoinmentController {
         }
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public ResponseEntity<String> addAppointment(@RequestBody Appoinment appointment) {
+    @RequestMapping(value = "/appointments/{id}", method = RequestMethod.POST)
+    public ResponseEntity<String> addAppointment(@RequestBody Appointment appointment) {
 
         try {
             repossitory.save(appointment);
