@@ -18,7 +18,7 @@ public class Appoinment {
     public Appoinment() {
 
     }
-
+    
     public int getId() {
         return id;
     }
