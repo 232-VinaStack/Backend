@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @Entity
 public class Clinic {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -37,10 +37,10 @@ public class Clinic {
         this.name = name;
     }
 
-    public void addDoctor(Doctor doctor) {
-        doctor.getClinics().add(this);
-        doctors.add(doctor);
-    }
+//    public void addDoctor(Doctor doctor) {
+//        doctor.getClinics().add(this);
+//        doctors.add(doctor);
+//    }
 
     public List<Doctor> getDoctors() {
         return this.doctors;

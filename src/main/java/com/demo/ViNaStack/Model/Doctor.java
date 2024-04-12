@@ -12,17 +12,28 @@ import java.util.ArrayList;
 @Entity
 public class Doctor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
     private String avatarLink;
     private Integer expYear;
     private String education;
-    @ManyToMany(mappedBy = "doctors")
-    private List<Clinic> clinics = new ArrayList<>();
+//    @ManyToMany(mappedBy = "doctors")
+//    private List<Clinic> clinics = new ArrayList<>();
+
+    public Doctor(String name, String avatarLink, Integer expYear, String education) {
+        this.name = name;
+        this.avatarLink = avatarLink;
+        this.expYear = expYear;
+        this.education = education;
+    }
 
     public Doctor() {
+    }
+
+    public Doctor(Long id) {
+        this.id = id;
     }
 
     public void setId(Long id) {
@@ -41,9 +52,9 @@ public class Doctor {
         this.education = education;
     }
 
-    public void setClinics(List<Clinic> clinics) {
-        this.clinics = clinics;
-    }
+//    public void setClinics(List<Clinic> clinics) {
+//        this.clinics = clinics;
+//    }
 
     public Integer getExpYear() {
         return expYear;
@@ -73,12 +84,8 @@ public class Doctor {
         this.name = name;
     }
 
-    public void addClinic(Clinic clinic) {
-        this.clinics.add(clinic);
-        clinic.getDoctors().add(this);
-    }
 
-    public List<Clinic> getClinics() {
-        return this.clinics;
-    }
+//    public List<Clinic> getClinics() {
+//        return this.clinics;
+//    }
 }

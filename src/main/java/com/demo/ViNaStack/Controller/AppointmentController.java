@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "")
+@RequestMapping(path = "/appointments")
 public class AppointmentController {
     @Autowired
     private AppointmentRepository repossitory;
 
-    @GetMapping("/appointments")
+    @GetMapping("")
     List<Appointment> getAppointment() {
         return repossitory.findAll();
     }
 
-    @RequestMapping(value = "/appointments/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteAppointment(@PathVariable("id") long id) {
         try {
             repossitory.deleteById(id);
@@ -32,7 +32,7 @@ public class AppointmentController {
         }
     }
 
-    @RequestMapping(value = "/appointments/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseEntity<String> addAppointment(@RequestBody Appointment appointment) {
 
         try {

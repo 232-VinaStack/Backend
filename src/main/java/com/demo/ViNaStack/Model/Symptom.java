@@ -16,6 +16,10 @@ public class Symptom {
 
     }
 
+    public Symptom(String name) {
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }
@@ -32,8 +36,4 @@ public class Symptom {
         this.name = name;
     }
 
-    public Symptom(String name, int id) {
-        this.name = name;
-        this.id = id;
-    }
 }
