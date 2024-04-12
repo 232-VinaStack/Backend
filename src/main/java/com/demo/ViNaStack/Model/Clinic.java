@@ -18,32 +18,22 @@ public class Clinic {
     private String name;
     private String symptom;
     @ManyToMany
-    @JoinTable(name = "doctor_clinic", joinColumns = @JoinColumn(name = "doctor_id"), inverseJoinColumns = @JoinColumn(name = "clinic_id"))
+    @JoinTable(name = "clinic_doctor", joinColumns = @JoinColumn(name = "clinic_id"), inverseJoinColumns = @JoinColumn(name = "doctor_id"))
     private List<Doctor> doctors = new ArrayList<>();
 
     public Clinic() {
     }
 
-    public Clinic(String name, String symptom) {
-        this.name = name;
-        this.symptom = symptom;
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void addDoctor(Doctor doctor) {
-        doctor.getClinics().add(this);
-        doctors.add(doctor);
-    }
-
-    public List<Doctor> getDoctors() {
-        return this.doctors;
+    public String getSymptom() {
+        return symptom;
     }
 
 }
