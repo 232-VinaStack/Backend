@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping(path = "/clinic")
-public class ClinicCtroller {
+public class ClinicController {
 
     @Autowired
     private ClinicRepossitories repository;
