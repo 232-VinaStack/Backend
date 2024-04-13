@@ -1,15 +1,3 @@
 com\demo\ViNaStack\DataBase\DataBase.class
-com\demo\ViNaStack\Controller\AppointmentController.class
-com\demo\ViNaStack\Repositories\ClinicRepository.class
-com\demo\ViNaStack\Model\Appointment.class
-com\demo\ViNaStack\Model\Doctor.class
-com\demo\ViNaStack\Repositories\DoctorRepository.class
-com\demo\ViNaStack\Model\Clinic.class
-com\demo\ViNaStack\Model\WorkTime.class
 com\demo\ViNaStack\API\api.class
-com\demo\ViNaStack\Model\Symptom.class
-com\demo\ViNaStack\Repositories\WorkTimeRepository.class
-com\demo\ViNaStack\Repositories\SymptomRepository.class
 com\demo\ViNaStack\ViNaStackApplication.class
-com\demo\ViNaStack\Controller\DoctorController.class
-com\demo\ViNaStack\Repositories\AppointmentRepository.class

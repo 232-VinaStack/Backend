@@ -1,9 +1,9 @@
 package com.demo.ViNaStack.Model;
 
-import jakarta.persistence.*;
-
-// import java.util.ArrayList;
-// import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Symptom {
@@ -14,6 +14,10 @@ public class Symptom {
 
     public Symptom() {
 
+    }
+
+    public Symptom(String name) {
+        this.name = name;
     }
 
     public Long getId() {
@@ -32,8 +36,4 @@ public class Symptom {
         this.name = name;
     }
 
-    public Symptom(String name, Long id) {
-        this.name = name;
-        this.id = id;
-    }
 }

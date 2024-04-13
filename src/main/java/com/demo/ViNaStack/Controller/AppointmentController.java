@@ -4,45 +4,34 @@ import com.demo.ViNaStack.Model.*;
 
 import com.demo.ViNaStack.Repositories.*;
 
+import com.demo.ViNaStack.Model.Appointment;
+import com.demo.ViNaStack.Model.Doctor;
+import com.demo.ViNaStack.Model.Symptom;
+import com.demo.ViNaStack.Repositories.*;
+import com.demo.ViNaStack.Repositories.SymptomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "/appointment")
+@RequestMapping(path = "")
 public class AppointmentController {
     @Autowired
     private AppointmentRepository repository;
-    private WorkTimeRepository workTimeRepository;
 
     @Autowired
     private SymptomRepository symptomRepository;
 
-    @GetMapping("")
-    List<Appointment> getAppointments() {
+    @GetMapping("/appointments")
+    List<Appointment> getAppointment() {
         return repository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getAppointmentById(@RequestParam Long id) {
-        try {
-            Appointment appointment = repository.findById(id).orElse(null);
-            if (appointment != null) {
-                return ResponseEntity.ok().body(appointment);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to retrieve appointment");
-        }
-    }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteAppointment(@PathVariable("id") Long id) {
+    @RequestMapping(value = "/appointments/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<String> deleteAppointment(@PathVariable("id") long id) {
         try {
             repository.deleteById(id);
             return ResponseEntity.ok("Appointment deleted successfully");
@@ -51,7 +40,7 @@ public class AppointmentController {
         }
     }
 
-    @PostMapping("/create")
+    @PostMapping("/appointments/create")
     public ResponseEntity<String> createAppointment(@RequestBody Appointment appointment) {
         try {
             List<Symptom> symptoms = appointment.getSymptoms();
@@ -59,12 +48,9 @@ public class AppointmentController {
             appointment.setSymptoms(symptoms);
             repository.save(appointment);
 
-            // ! update WorkTime state
-            WorkTime workTime = workTimeRepository.findByStartTime(appointment.getStart_time());
-            workTime.setState("Busy");
             return ResponseEntity.ok("Appointment created successfully");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create appointment" + e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add appointment");
         }
     }
 }

@@ -12,14 +12,15 @@ import java.util.ArrayList;
 @Entity
 public class Doctor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public String avatar_link;
+    public String education;
+    public int exp_year;
     private String name;
     @ManyToMany(mappedBy = "doctors")
     private List<Clinic> clinics = new ArrayList<>();
-    @ManyToMany(mappedBy = "doctors")
-    private List<WorkTime> worktimes = new ArrayList<>();
 
     public Doctor() {
     }
@@ -34,10 +35,6 @@ public class Doctor {
 
     public List<Clinic> getClinics() {
         return clinics;
-    }
-
-    public List<WorkTime> getWorktimes() {
-        return worktimes;
     }
 
 }

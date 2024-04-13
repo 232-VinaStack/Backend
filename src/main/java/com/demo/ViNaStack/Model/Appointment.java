@@ -9,84 +9,81 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long doctor_id;
-    private String start_time;
+    private String user_name;
+    private String user_phone;
+    private String clinic;
+    String workday;
 
-    public Appointment(Long doctor_id, String start_time, String end_time, String appointment_date,
-            List<Symptom> symptoms, Long patient_id) {
-        this.doctor_id = doctor_id;
-        this.start_time = start_time;
-        this.end_time = end_time;
-        this.appointment_date = appointment_date;
-        this.symptoms = symptoms;
-        this.patient_id = patient_id;
+    @ManyToOne
+    @JoinTable(name = "Appointment_Doctor", // Define join table name
+            joinColumns = @JoinColumn(name = "Appointment_id"), inverseJoinColumns = @JoinColumn(name = "Doctor_id"))
+    private Doctor doctor_id;
+
+    @OneToMany(cascade = CascadeType.PERSIST) // For persisting symptoms automatically
+    @JoinTable(name = "Appointment_Symptom", // Define join table name
+            joinColumns = @JoinColumn(name = "Appointment_id"), inverseJoinColumns = @JoinColumn(name = "Symptom_id"))
+    private List<Symptom> symptoms;
+
+    public Long getId() {
+        return id;
     }
 
     public Appointment() {
 
     }
 
-    public Long getId() {
-        return id;
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public String getUser_phone() {
+        return user_phone;
+    }
+
+    public String getClinic() {
+        return clinic;
+    }
+
+    public void setUser_phone(String user_phone) {
+        this.user_phone = user_phone;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getDoctor_id() {
-        return doctor_id;
+    public void setClinic(String clinic) {
+        this.clinic = clinic;
     }
 
-    public void setDoctor_id(Long doctor_id) {
+    public void setDoctor_id(Doctor doctor_id) {
         this.doctor_id = doctor_id;
-    }
-
-    public String getStart_time() {
-        return start_time;
-    }
-
-    public void setStart_time(String start_time) {
-        this.start_time = start_time;
-    }
-
-    public String getEnd_time() {
-        return end_time;
-    }
-
-    public void setEnd_time(String end_time) {
-        this.end_time = end_time;
-    }
-
-    public String getAppointment_date() {
-        return appointment_date;
-    }
-
-    public void setAppointment_date(String appointment_date) {
-        this.appointment_date = appointment_date;
-    }
-
-    public List<Symptom> getSymptoms() {
-        return symptoms;
     }
 
     public void setSymptoms(List<Symptom> symptoms) {
         this.symptoms = symptoms;
     }
 
-    public Long getPatient_id() {
-        return patient_id;
+    public Doctor getDoctor_id() {
+        return doctor_id;
     }
 
-    public void setPatient_id(Long patient_id) {
-        this.patient_id = patient_id;
+    public List<Symptom> getSymptoms() {
+        return symptoms;
     }
 
-    private String end_time;
-    private String appointment_date;
-    @ManyToMany
-    @JoinTable(name = "appointment_symptoms", joinColumns = @JoinColumn(name = "appointment_id"), inverseJoinColumns = @JoinColumn(name = "symptom_id"))
-    private List<Symptom> symptoms;
-    private Long patient_id;
+    public Appointment(String user_name, String user_phone, String clinic, Doctor doctor_id,
+            List<Symptom> symptoms) {
+
+        this.user_name = user_name;
+        this.user_phone = user_phone;
+        this.clinic = clinic;
+        this.doctor_id = doctor_id;
+        this.symptoms = symptoms;
+    }
 
 }
