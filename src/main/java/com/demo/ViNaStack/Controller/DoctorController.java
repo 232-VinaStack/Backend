@@ -54,16 +54,7 @@ public class DoctorController {
     }
 
     @GetMapping("/symptom")
-    public ResponseEntity<?> getDoctorBySymptom(@RequestParam String symptom) {
-        try {
-            Doctor doctor = repository.findByClinicsSymptomContaining(symptom).get(0);
-            if (doctor != null) {
-                return ResponseEntity.ok().body(doctor);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to retrieve doctor");
-        }
+    public List<Doctor> getDoctorBySymptom(@RequestParam String symptom) {
+        return repository.findByClinicsSymptomContaining(symptom);
     }
 }
