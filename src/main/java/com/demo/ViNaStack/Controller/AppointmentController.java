@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -51,6 +52,25 @@ public class AppointmentController {
             return ResponseEntity.ok("Appointment created successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add appointment");
+        }
+    }
+
+
+    @GetMapping("/appointments/doctor/{id}")
+    public ResponseEntity<?> getAppointmentsByDoctor(@PathVariable("id") long Doctor_id) {
+        try {
+            List<Appointment> appointments = repository.findAll();
+            List<Appointment> result = new ArrayList<>();
+
+            for(int i = 0; i < appointments.size(); i++) {
+                if(appointments.get(i).getDoctor_id() != null && appointments.get(i).getDoctor_id().getId() == Doctor_id) { // Sử dụng get() để truy cập và getId() để lấy id của bác sĩ
+                    result.add(appointments.get(i));
+                }
+            }
+
+            return ResponseEntity.ok().body(result);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to retrieve doctor");
         }
     }
 }
